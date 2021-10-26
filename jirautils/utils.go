@@ -71,19 +71,24 @@ func CheckIfFindingExists(finding finding.Finding) bool {
 }
 
 // Create a JIRA Issue
-func CreateIssue(finding finding.Finding) {
+func CreateIssue(f finding.Finding) {
+	summary := f.Name + " - " + f.Description
+	var labels []string
+	labels = append(labels, "AUTOM8D", f.Source)
 	i := jira.Issue{
 		Fields: &jira.IssueFields{
-			Description: finding.Detail,
+			Description: finding.GetDetailString(f),
 			Type: jira.IssueType{
 				Name: issueType,
 			},
 			Project: jira.Project{
 				Key: project,
 			},
-			Summary: finding.Name,
+			Summary: summary,
+			Labels:  labels,
 		},
 	}
+
 	_, _, err := jiraClient.Issue.Create(&i)
 	if err != nil {
 		panic(err)

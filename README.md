@@ -21,6 +21,8 @@ Set your environment with:
 
 See also the `example_env.sh` file.
 
+If you are doing this in a BitBucket Pipeline, see this [documentation](https://support.atlassian.com/bitbucket-cloud/docs/variables-and-secrets/#Workspace-variables) about setting variables.
+
 ## Releasing
 
 off2jira works to follow golang best practices.  Therefore, when updating, we need to do the following:
